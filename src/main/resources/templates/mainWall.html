@@ -1,11 +1,11 @@
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 <body>
-	<div>
+	<div layout:fragment="content" style="margin-bottom: 50px;">
 		<div style="border: 1px solid black; width: 400px;">
 			<h3>Post Your Meme</h3>
 			<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
-				<input type="file" name="meme">
-				<button type="submit">Upload Meme</button>
+				<input type="file" name="meme" style="display: inline-block;">
+				<button type="submit" style="display: inline-block;">Upload Meme</button>
 			</form>
 		</div >
 		<div>
@@ -34,12 +34,12 @@
 							</form> 
 						</div>
 					</div >
-					<div>
-						<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
-							<input type="file" name="meme">
-							<button type="submit">Upload Meme</button>
+					<div >
+						<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST" style="margin: 0">
+							<input type="file" name="meme" style="display: inline-block;">
+							<button type="submit" style="display: inline-block;">Upload Meme</button>
 						</form>
-					</div>
+					</div >
 					<div th:each="subpost : ${meme.getResponses()}">
 						<div style="border: 1px solid black">
 							<div style="margin-left:30px">
@@ -68,8 +68,8 @@
 								</div >
 								<div>
 									<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
-										<input type="file" name="meme">
-										<button type="submit">Upload Meme</button>
+										<input type="file" name="meme" style="display: inline-block;">
+										<button type="submit" style="display: inline-block;">Upload Meme</button>
 									</form>
 								</div>
 							</div>
@@ -78,6 +78,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div >
 </body>
 </html>

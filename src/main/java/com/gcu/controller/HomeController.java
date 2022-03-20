@@ -85,4 +85,19 @@ public class HomeController {
 		System.out.println(filename);
 		return "redirect:/";
 	}
+	
+	@PostMapping("/postLike")
+	public String postLike() {
+		return "redirect:/";
+	}
+	
+	@PostMapping("/postDislike")
+	public String postDislike() {
+		return "redirect:/";
+	}
+	
+	@PostMapping("/postShare")
+	public String postShare() {
+		return "redirect:/"; 
+	}
 }
