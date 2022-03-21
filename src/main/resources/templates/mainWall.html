@@ -1,0 +1,83 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<body>
+	<div layout:fragment="content" style="margin-bottom: 50px;">
+		<div style="border: 1px solid black; width: 400px;">
+			<h3>Post Your Meme</h3>
+			<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
+				<input type="file" name="meme" style="display: inline-block;">
+				<button type="submit" style="display: inline-block;">Upload Meme</button>
+			</form>
+		</div >
+		<div>
+			<div th:each="meme : ${memes}">
+				<div style="border: 1px solid black; width: 400px; margin-top: 20px;">
+					<div>
+						<p th:text="${meme.getUsername()}"></p><p th:text="${meme.getFormattedDate()}" ></p>
+					</div>
+					<div>
+						<img th:src=${meme.getImageLocation()} style="width:300px; height: 300px;" />
+					</div>
+					<div style="display: inline-block;">
+						<div style="display: inline-block;">
+							<form action="#" th:action="@{postLike}" method="Post">
+								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+							</form > 
+						</div>
+						<div style="display: inline-block;">
+							<form action="#" th:action="@{postDislike}" method="Post">
+								<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+							</form > 
+						</div>
+						<div style="display: inline-block;">
+							<form action="#" th:action="@{postShare}" method="Post">
+								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+							</form> 
+						</div>
+					</div >
+					<div >
+						<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST" style="margin: 0">
+							<input type="file" name="meme" style="display: inline-block;">
+							<button type="submit" style="display: inline-block;">Upload Meme</button>
+						</form>
+					</div >
+					<div th:each="subpost : ${meme.getResponses()}">
+						<div style="border: 1px solid black">
+							<div style="margin-left:30px">
+								<div>
+									<p th:text="${subpost.getUsername()}"></p><p th:text="${subpost.getFormattedDate()}" ></p>
+								</div>
+								<div>
+									<img th:src=${subpost.getImageLocation()} style="width:250px; height: 250px;" />
+								</div>
+								<div style="display: inline-block;">
+									<div style="display: inline-block;">
+										<form action="#" th:action="@{postLike}" method="Post">
+											<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+										</form > 
+									</div>
+									<div style="display: inline-block;">
+										<form action="#" th:action="@{postDislike}" method="Post">
+											<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+										</form > 
+									</div>
+									<div style="display: inline-block;">
+										<form action="#" th:action="@{postShare}" method="Post">
+											<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
+										</form> 
+									</div>
+								</div >
+								<div>
+									<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
+										<input type="file" name="meme" style="display: inline-block;">
+										<button type="submit" style="display: inline-block;">Upload Meme</button>
+									</form>
+								</div>
+							</div>
+						</div >
+					</div>
+				</div>
+			</div>
+		</div>
+	</div >
+</body>
+</html>
