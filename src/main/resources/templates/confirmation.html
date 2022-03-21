@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xlmns:th="http://www.thymeleaf.org">
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Confirmation</title>
 	</head>
 	<body>
+	<div layout:fragment="content">
 	  	<table style="width:50%">
 	  		<thead>
 	  			<tr>
@@ -29,5 +30,6 @@
 	  			</tr>
 	  		</tbody>
 	  	</table>
+	</div>
 	</body>
 </html>
