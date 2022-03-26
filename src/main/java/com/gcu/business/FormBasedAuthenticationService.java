@@ -1,9 +1,6 @@
 package com.gcu.business;
 
 import javax.validation.Valid;
-
-import org.springframework.validation.BindingResult;
-
 import com.gcu.model.AuthenticationModel;
 
 public class FormBasedAuthenticationService implements AuthenticationBusinessServiceInterface {
@@ -13,12 +10,12 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 	}
 	
 	@Override
-	public boolean Authenticate(@Valid AuthenticationModel authenticationModel, BindingResult bindingResult) {
+	public boolean Authenticate(@Valid AuthenticationModel authenticationModel) {
 		
-		if(bindingResult.hasErrors()) {
+		if(authenticationModel.getUsername().equals("admin") && authenticationModel.getPassword().equals("admin")) {
+			return true;
+		} else {
 			return false;
 		}
-		
-		return true;
 	}
 }
