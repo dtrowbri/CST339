@@ -6,6 +6,10 @@ import com.gcu.model.UserModel;
 
 public class AccountCreationAuthenticationService implements RegistrationBusinessServiceInterface {
 	
+	public AccountCreationAuthenticationService() {
+		
+	}
+	
 	/**
 	 * Compare the entered username to the database to make sure the name is available
 	 * 
