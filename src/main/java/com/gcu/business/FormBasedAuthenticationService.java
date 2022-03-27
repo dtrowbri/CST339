@@ -20,17 +20,4 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 		}
 	}
 
-	/**
-	 * Compare the entered username to the database to make sure the name is available
-	 * 
-	 * Currently only compares against the "admin" username 
-	 */
-	@Override
-	public boolean Authenticate(@Valid UserModel userModel) {
-		if (!userModel.getUsername().equals("admin")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

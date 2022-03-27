@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gcu.business.AuthenticationBusinessServiceInterface;
+import com.gcu.business.RegistrationBusinessServiceInterface;
 import com.gcu.model.UserModel;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 	
-	@Autowired private AuthenticationBusinessServiceInterface authenticationService;
+	@Autowired private RegistrationBusinessServiceInterface registrationService;
 	
 	@GetMapping("/")
 	public String displayModel(Model model) {
@@ -39,7 +39,7 @@ public class RegistrationController {
 		}
 		
 		// verify that the entered username is available
-		if (authenticationService.Authenticate(userModel)) {
+		if (registrationService.Authenticate(userModel)) {
 			model.addAttribute("title", "Confirmation");
 			model.addAttribute("user", userModel);
 			return "confirmation";
