@@ -2,6 +2,7 @@ package com.gcu.business;
 
 import javax.validation.Valid;
 import com.gcu.model.AuthenticationModel;
+import com.gcu.model.UserModel;
 
 public class FormBasedAuthenticationService implements AuthenticationBusinessServiceInterface {
 	
@@ -18,4 +19,5 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 			return false;
 		}
 	}
+
 }
