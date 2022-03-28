@@ -39,7 +39,7 @@ public class RegistrationController {
 		}
 		
 		// verify that the entered username is available
-		if (registrationService.Authenticate(userModel)) {
+		if (registrationService.isUserNameTaken(userModel)) {
 			model.addAttribute("title", "Confirmation");
 			model.addAttribute("user", userModel);
 			return "confirmation";

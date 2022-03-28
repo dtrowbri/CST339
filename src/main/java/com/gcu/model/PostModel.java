@@ -19,6 +19,15 @@ public class PostModel {
 		this.responses = new ArrayList<PostModel>();
 	}
 	
+	public PostModel(String username, String ImageLocation, LocalDateTime postedOn) {
+		this.responses = new ArrayList<PostModel>();
+		this.setUsername(username);
+		this.setImageLocation(ImageLocation);
+		this.setNumberOfLikes(0);
+		this.setNumberOfDislikes(0);
+		this.setPostedOn(postedOn);
+	}
+	
 	public PostModel(long id, String username, String ImageLocation, int numberOfLikes, int numberOfDislikes, LocalDateTime postedOn) {
 		this.responses = new ArrayList<PostModel>();
 		this.setId(id);

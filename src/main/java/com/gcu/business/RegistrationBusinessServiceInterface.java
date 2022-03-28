@@ -6,6 +6,6 @@ import com.gcu.model.UserModel;
 
 public interface RegistrationBusinessServiceInterface {
 	
-	public boolean Authenticate(@Valid UserModel userModel);
+	public boolean isUserNameTaken(@Valid UserModel userModel);
 
 }

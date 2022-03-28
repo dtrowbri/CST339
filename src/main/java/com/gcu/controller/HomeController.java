@@ -73,14 +73,18 @@ public class HomeController {
 		String timeNowStr = dateTimeFormatter.format(now);
 		String filename = StringUtils.cleanPath(meme.getOriginalFilename());
 		filename = timeNowStr + filename;
+		String fileNameReferencePath = "/images/" + filename;
 		
 		try {
-			Path path = Paths.get(imageDir + filename);
+		    Path path = Paths.get(imageDir + filename);
 			Files.copy(meme.getInputStream(), path);
-			System.out.println(path.toAbsolutePath());
+			PostModel newPost = new PostModel("admin", fileNameReferencePath, now);
+			System.out.println(fileNameReferencePath);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+
 		
 		System.out.println(filename);
 		return "redirect:/";

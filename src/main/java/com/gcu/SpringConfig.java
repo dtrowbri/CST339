@@ -3,7 +3,7 @@ package com.gcu;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.gcu.business.AccountCreationAuthenticationService;
+import com.gcu.business.AccountCreationService;
 import com.gcu.business.AuthenticationBusinessServiceInterface;
 import com.gcu.business.FormBasedAuthenticationService;
 import com.gcu.business.RegistrationBusinessServiceInterface;
@@ -18,6 +18,6 @@ public class SpringConfig {
 	
 	@Bean("registrationBusinessServiceInterface")
 	public RegistrationBusinessServiceInterface getRegistrationService() {
-		return new AccountCreationAuthenticationService();
+		return new AccountCreationService();
 	}
 }

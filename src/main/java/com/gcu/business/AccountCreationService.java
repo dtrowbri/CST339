@@ -4,9 +4,9 @@ import javax.validation.Valid;
 
 import com.gcu.model.UserModel;
 
-public class AccountCreationAuthenticationService implements RegistrationBusinessServiceInterface {
+public class AccountCreationService implements RegistrationBusinessServiceInterface {
 	
-	public AccountCreationAuthenticationService() {
+	public AccountCreationService() {
 		
 	}
 	
@@ -16,7 +16,7 @@ public class AccountCreationAuthenticationService implements RegistrationBusines
 	 * Currently only compares against the "admin" username 
 	 */
 	@Override
-	public boolean Authenticate(@Valid UserModel userModel) {
+	public boolean isUserNameTaken(@Valid UserModel userModel) {
 		if (!userModel.getUsername().equals("admin")) {
 			return true;
 		} 
