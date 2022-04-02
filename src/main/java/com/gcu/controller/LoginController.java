@@ -40,7 +40,7 @@ public class LoginController {
 			}
 			if(authenticationService.Authenticate(authenticationModel)) {
 				model.addAttribute("title", "Main Wall");
-				return "mainWall";
+				return "redirect:/";
 			} else {
 				model.addAttribute("title","Login Form");
 				bindingResult.addError(new ObjectError("username", "Username or password is incorrect!"));
