@@ -10,6 +10,8 @@ public class UserModel {
 	 * (NotNull was not providing any error even if the input was left blank)
 	 */
 	
+	private int UserId;
+	
 	@Size(min=1, message="This is a required field")
 	private String username;
 	
@@ -48,6 +50,16 @@ public class UserModel {
 	 * @param address
 	 * @param phone
 	 */
+	public UserModel(int UserId, String username, String fName, String lName, String email, String address, String phone) {
+		this.username = username;
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+	}
+
+	
 	public UserModel(String username, String password, String fName, String lName, String email, String address, String phone) {
 		this.username = username;
 		this.password = password;
@@ -116,6 +128,14 @@ public class UserModel {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(int userId) {
+		UserId = userId;
 	}
 	
 }

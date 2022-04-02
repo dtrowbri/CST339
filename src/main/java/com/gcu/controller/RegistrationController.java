@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcu.business.RegistrationBusinessServiceInterface;
+import com.gcu.data.UserDataService;
 import com.gcu.model.UserModel;
+import com.gcu.data.UserDataService;
 
 @Controller
 @RequestMapping("/registration")
@@ -32,6 +34,8 @@ public class RegistrationController {
 
 	@PostMapping("/registerUser")
 	public String resgisterUser(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+		
+		registrationService.createUser(userModel);
 		
 		// check for validation errors
 		if (bindingResult.hasErrors()) {

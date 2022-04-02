@@ -1,10 +1,16 @@
 package com.gcu.business;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import com.gcu.data.DataAccessInterface;
 import com.gcu.model.UserModel;
 
 public class AccountCreationService implements RegistrationBusinessServiceInterface {
+	
+	@Autowired DataAccessInterface service;
 	
 	public AccountCreationService() {
 		
@@ -21,6 +27,15 @@ public class AccountCreationService implements RegistrationBusinessServiceInterf
 			return true;
 		} 
 		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean createUser(UserModel user) {
+		if(service.create(user)) {
+			return true;
+		} else {
 			return false;
 		}
 	}
