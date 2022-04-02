@@ -1,16 +1,23 @@
 package com.gcu.business;
 
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcu.data.DataAccessInterface;
 import com.gcu.model.AuthenticationModel;
 import com.gcu.model.UserModel;
+import com.gcu.data.AuthenticationDataAccessInterface;
 
 public class FormBasedAuthenticationService implements AuthenticationBusinessServiceInterface {
+	
+	@Autowired AuthenticationDataAccessInterface service;
 	
 	public FormBasedAuthenticationService() {
 		
 	}
 	
-	@Override
+	/*@Override
 	public boolean Authenticate(@Valid AuthenticationModel authenticationModel) {
 		
 		if(authenticationModel.getUsername().equals("admin") && authenticationModel.getPassword().equals("admin")) {
@@ -18,6 +25,11 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 		} else {
 			return false;
 		}
+	}*/
+	
+	@Override
+	public boolean Authenticate(@Valid AuthenticationModel authenticationModel) {
+		return service.AuthenticateUser(authenticationModel);
 	}
-
+	
 }

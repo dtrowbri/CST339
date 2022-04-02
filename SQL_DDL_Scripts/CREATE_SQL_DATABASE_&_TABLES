@@ -1,4 +1,4 @@
-SELECT * FROM cst339.orders;CREATE DATABASE `dememerr` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE `dememerr` /*!40100 DEFAULT CHARACTER SET utf8 */;
 CREATE TABLE `employee` (
   `EmployeeId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserName` varchar(200) NOT NULL,
@@ -18,10 +18,11 @@ CREATE TABLE `users` (
   `Email` varchar(200) NOT NULL,
   `Address` varchar(200) DEFAULT NULL,
   `Phone` varchar(15) DEFAULT NULL,
+  `Password` varchar(200) NOT NULL,
   PRIMARY KEY (`UserId`),
   UNIQUE KEY `UserId_UNIQUE` (`UserId`),
   UNIQUE KEY `Username_UNIQUE` (`UserName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `friendslist` (
   `FriendsListId` int(10) unsigned NOT NULL AUTO_INCREMENT,

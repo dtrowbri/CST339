@@ -43,7 +43,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		}
 		
 		
-		return null;
+		return users;
 	}
 
 	@Override
@@ -56,6 +56,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		try {
 			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql);
 			user.setUserId(srs.getInt("UserId"));
+			user.setPassword(srs.getNString("Password"));
 			user.setUsername(srs.getNString("UserName"));
 			user.setfName(srs.getNString("FirstName"));
 			user.setlName(srs.getNString("LastName"));
@@ -70,11 +71,11 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public boolean create(UserModel user) {
 		
-		String sql = "INSERT INTO USERS (`USERID`, `USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `ADDRESS`, `PHONE`) VALUES (null,?,?,?,?,?,?)";
+		String sql = "INSERT INTO USERS (`USERID`, `USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `ADDRESS`, `PHONE`, `PASSWORD`) VALUES (null,?,?,?,?,?,?,?)";
 		
 		int numOfRows = 0;
-		Object[] params = new Object[] {user.getUserId(), user.getUsername(), user.getfName(), user.getlName(), user.getAddress(), user.getPhone()};
-		int[] dataTypes = new int[] {Types.INTEGER, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
+		Object[] params = new Object[] {user.getUserId(), user.getUsername(), user.getfName(), user.getlName(), user.getAddress(), user.getPhone(), user.getPassword()};
+		int[] dataTypes = new int[] {Types.INTEGER, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
 		
 		try {
 			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
@@ -90,15 +91,47 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	}
 
 	@Override
-	public boolean update(UserModel t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(UserModel user) {
+
+		String sql = "UPDATE USERS `FIRSTNAME` = ?, `LASTNAME` = ?, `EMAIL` = ?, `ADDRESS` = ?, `PHONE` = ? WHERE `USERID` = ?";
+		
+		int numOfRows = 0;
+		Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()};
+		int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.INTEGER};
+		
+		try{
+			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(numOfRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean delete(UserModel t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(UserModel user) {
+		
+		String sql = "DELETE FROM USERS WHERE `USERID` = ?";
+		
+		int numOfRows = 0;
+		Object[] params = new Object[] {user.getUserId()};
+		int[] dataTypes = new int[] {Types.INTEGER};
+		
+		try {
+			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		if(numOfRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	
