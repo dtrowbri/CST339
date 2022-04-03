@@ -32,14 +32,6 @@ CREATE TABLE `friendslist` (
   UNIQUE KEY `FriendsListId_UNIQUE` (`FriendsListId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `postresponses` (
-  `PostResponseId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ParentPostId` int(10) unsigned NOT NULL,
-  `ChildPostId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`PostResponseId`),
-  UNIQUE KEY `PostResponseId_UNIQUE` (`PostResponseId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `posts` (
   `PostId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
@@ -47,6 +39,7 @@ CREATE TABLE `posts` (
   `NumberOfLikes` int(10) unsigned NOT NULL,
   `NumberOfDislikes` int(10) unsigned NOT NULL,
   `PostedOn` datetime NOT NULL,
+  `ParentPostId` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`PostId`),
   UNIQUE KEY `PostId_UNIQUE` (`PostId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin7;

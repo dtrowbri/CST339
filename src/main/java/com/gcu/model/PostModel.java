@@ -8,7 +8,9 @@ import java.util.List;
 public class PostModel {
 
 	 long id;
+	 long parentPostId;
 	 String username;
+	 int userId;
 	 List<PostModel> responses;
 	 String ImageLocation;
 	 int numberOfLikes;
@@ -28,6 +30,16 @@ public class PostModel {
 		this.setPostedOn(postedOn);
 	}
 	
+	public PostModel(int userId, String ImageLocation, LocalDateTime postedOn) {
+		this.responses = new ArrayList<PostModel>();
+		this.setUsername(username);
+		this.setImageLocation(ImageLocation);
+		this.setNumberOfLikes(0);
+		this.setNumberOfDislikes(0);
+		this.setPostedOn(postedOn);
+		this.setUserId(userId);
+	}
+	
 	public PostModel(long id, String username, String ImageLocation, int numberOfLikes, int numberOfDislikes, LocalDateTime postedOn) {
 		this.responses = new ArrayList<PostModel>();
 		this.setId(id);
@@ -37,7 +49,31 @@ public class PostModel {
 		this.setNumberOfDislikes(numberOfDislikes);
 		this.setPostedOn(postedOn);
 	}
+	
+	public PostModel(long id, long parentPostId, String username, String ImageLocation, int numberOfLikes, int numberOfDislikes, LocalDateTime postedOn) {
+		this.responses = new ArrayList<PostModel>();
+		this.setId(id);
+		this.setUsername(username);
+		this.setImageLocation(ImageLocation);
+		this.setNumberOfLikes(numberOfLikes);
+		this.setNumberOfDislikes(numberOfDislikes);
+		this.setPostedOn(postedOn);
+		this.setParentPostId(parentPostId);
+	}
 
+	public PostModel(long id, long parentPostId, int userId, String ImageLocation, int numberOfLikes, int numberOfDislikes, LocalDateTime postedOn) {
+		this.responses = new ArrayList<PostModel>();
+		this.setId(id);
+		this.setUserId(userId);
+		this.setUsername(username);
+		this.setImageLocation(ImageLocation);
+		this.setNumberOfLikes(numberOfLikes);
+		this.setNumberOfDislikes(numberOfDislikes);
+		this.setPostedOn(postedOn);
+		this.setParentPostId(parentPostId);
+	}
+
+	
 	public long getId() {
 		return id;
 	}
@@ -103,4 +139,21 @@ public class PostModel {
 		String timePosted = dateTimeFormatter.format(this.getPostedOn());
 		return timePosted;
 	}
+
+	public long getParentPostId() {
+		return parentPostId;
+	}
+
+	public void setParentPostId(long parentPostId) {
+		this.parentPostId = parentPostId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 }

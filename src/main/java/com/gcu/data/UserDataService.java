@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import com.gcu.model.UserModel;
 
-@Service
+@Service("UserDataAccess")
 public class UserDataService implements DataAccessInterface<UserModel> {
 
 	@Autowired javax.sql.DataSource dataSource;
@@ -50,18 +50,21 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	public UserModel findById(int id) {
 		
 		String sql = "SELECT * FROM USERS WHERE USERID = ?";
+		Object[] params = new Object[] {id};
 		
 		UserModel user = new UserModel();
 		
 		try {
-			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql);
-			user.setUserId(srs.getInt("UserId"));
-			user.setPassword(srs.getNString("Password"));
-			user.setUsername(srs.getNString("UserName"));
-			user.setfName(srs.getNString("FirstName"));
-			user.setlName(srs.getNString("LastName"));
-			user.setEmail(srs.getNString("Address"));
-			user.setPhone(srs.getNString("Phone"));
+			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql, params);
+			if(srs.next()) {
+				user.setUserId(srs.getInt("UserId"));
+				user.setPassword(srs.getString("Password"));
+				user.setUsername(srs.getString("UserName"));
+				user.setfName(srs.getString("FirstName"));
+				user.setlName(srs.getString("LastName"));
+				user.setEmail(srs.getString("Address"));
+				user.setPhone(srs.getString("Phone"));
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -2,11 +2,7 @@ package com.gcu;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.gcu.business.AccountCreationService;
-import com.gcu.business.AuthenticationBusinessServiceInterface;
-import com.gcu.business.FormBasedAuthenticationService;
-import com.gcu.business.RegistrationBusinessServiceInterface;
+import com.gcu.business.*;
 
 @Configuration
 public class SpringConfig {
@@ -19,5 +15,10 @@ public class SpringConfig {
 	@Bean("registrationBusinessServiceInterface")
 	public RegistrationBusinessServiceInterface getRegistrationService() {
 		return new AccountCreationService();
+	}
+	
+	@Bean("postServiceInterface")
+	public PostServiceInterface getPostServer() {
+		return new PostService();
 	}
 }
