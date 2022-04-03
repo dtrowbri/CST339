@@ -5,12 +5,16 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.gcu.data.DataAccessInterface;
 import com.gcu.model.UserModel;
 
 public class AccountCreationService implements RegistrationBusinessServiceInterface {
 	
-	@Autowired DataAccessInterface service;
+	@Autowired 
+	@Qualifier("UserDataAccess")
+	DataAccessInterface service;
 	
 	public AccountCreationService() {
 		

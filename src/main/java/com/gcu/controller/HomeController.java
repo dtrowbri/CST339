@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -22,18 +23,23 @@ import com.gcu.model.PostModel;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import com.gcu.business.PostService;
+import com.gcu.business.PostServiceInterface;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
+	@Autowired private PostServiceInterface service;
+	
 	final String imageDir = "src/main/resources/static/images/";
 	
 	@GetMapping("")
 	public String display(Model model) {
 		
-		List<PostModel> posts = new ArrayList<PostModel>();
+		List<PostModel> postsFromDB = service.findAll();
+		
+		/*List<PostModel> posts = new ArrayList<PostModel>();
 		PostModel firstPost = new PostModel();
 		firstPost.setImageLocation("/images/20220320144833tumblr_na1mmnDx9i1txue1qo1_540.jpg");
 		firstPost.setUsername("dtrowbri");
@@ -57,9 +63,9 @@ public class HomeController {
 		secondPost.setPostedOn(LocalDateTime.now());
 
 		posts.add(firstPost);
-		posts.add(secondPost);
+		posts.add(secondPost);*/
 		
-		model.addAttribute("memes", posts);
+		model.addAttribute("memes", postsFromDB);
 		model.addAttribute("title", "Main Wall");
 		
 		return "mainWall";
@@ -84,7 +90,9 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-
+		PostModel post = new PostModel(1, fileNameReferencePath, now);
+		boolean postSucceeded = service.create(post);
+		System.out.println(postSucceeded);
 		
 		System.out.println(filename);
 		return "redirect:/";
