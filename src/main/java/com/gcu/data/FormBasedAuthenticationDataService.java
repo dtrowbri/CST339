@@ -23,27 +23,25 @@ public class FormBasedAuthenticationDataService implements AuthenticationDataAcc
 	@Override
 	public boolean AuthenticateUser(AuthenticationModel authenticationModel) {
 		
-		String sql = "SELECT COUNT(USERID) as `COUNT` FROM USERS WHERE `USERID` = ? AND `PASSWORD` = ?";
+		String sql = "SELECT `PASSWORD` as `PASSWORD` FROM USERS WHERE `USERNAME` = ?";
 		
-		int numOfRows = 0;
-		Object[] params = new Object[] {authenticationModel.getUsername(), authenticationModel.getPassword()};
-		int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR};
+		Object[] params = new Object[] {authenticationModel.getUsername()};
+		int[] dataTypes = new int[] {Types.NVARCHAR};
+		boolean passwordValid = false;
 			
 		try {
-			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql, params, dataTypes);
-			if(srs.next()) {
-				numOfRows = srs.getInt("COUNT");
+			String password = jdbcTemplateObject.queryForObject(sql, params, String.class);
+
+			if(password.equals(authenticationModel.getPassword())) {
+				passwordValid = true;
 			}
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		if(numOfRows == 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return passwordValid;
 	}
 
 }

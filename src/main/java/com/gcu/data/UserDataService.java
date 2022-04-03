@@ -74,8 +74,8 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 		String sql = "INSERT INTO USERS (`USERID`, `USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `ADDRESS`, `PHONE`, `PASSWORD`) VALUES (null,?,?,?,?,?,?,?)";
 		
 		int numOfRows = 0;
-		Object[] params = new Object[] {user.getUserId(), user.getUsername(), user.getfName(), user.getlName(), user.getAddress(), user.getPhone(), user.getPassword()};
-		int[] dataTypes = new int[] {Types.INTEGER, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
+		Object[] params = new Object[] {user.getUsername(), user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getPassword()};
+		int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
 		
 		try {
 			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
