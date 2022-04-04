@@ -30,12 +30,12 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql);
 			while(srs.next()) {
 					users.add(new UserModel(srs.getInt("UserId"),
-							srs.getNString("UserName"),
-							srs.getNString("FirstName"),
-							srs.getNString("LastName"),
-							srs.getNString("Email"),
-							srs.getNString("Address"),
-							srs.getNString("Phone")));
+							srs.getString("UserName"),
+							srs.getString("FirstName"),
+							srs.getString("LastName"),
+							srs.getString("Email"),
+							srs.getString("Address"),
+							srs.getString("Phone")));
 			}
 			
 		} catch(Exception e) {

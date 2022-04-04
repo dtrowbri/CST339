@@ -34,19 +34,23 @@ public class RegistrationController {
 
 	@PostMapping("/registerUser")
 	public String resgisterUser(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
-		
-		registrationService.createUser(userModel);
-		
+				
 		// check for validation errors
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
 		
 		// verify that the entered username is available
-		if (registrationService.isUserNameTaken(userModel)) {
-			model.addAttribute("title", "Confirmation");
-			model.addAttribute("user", userModel);
-			return "confirmation";
+		if (!registrationService.isUserNameTaken(userModel)) {
+			if(registrationService.createUser(userModel)) {
+				model.addAttribute("title", "Confirmation");
+				model.addAttribute("user", userModel);
+				return "confirmation";
+			} else {
+				bindingResult.addError(new ObjectError("username", "Error occured creating user."));
+				model.addAttribute("title", "Registration Form");
+				return "registration";
+			}
 		} else {
 			bindingResult.addError(new ObjectError("username", "The username you entered is already taken."));
 			model.addAttribute("title", "Registration Form");
