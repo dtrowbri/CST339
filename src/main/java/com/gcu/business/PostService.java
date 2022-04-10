@@ -80,9 +80,8 @@ public class PostService implements PostServiceInterface {
 	}
 
 	@Override
-	public boolean update(PostModel t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(PostModel post) {
+		return service.update(post);
 	}
 	
 }

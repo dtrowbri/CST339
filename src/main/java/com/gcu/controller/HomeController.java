@@ -39,32 +39,6 @@ public class HomeController {
 		
 		List<PostModel> postsFromDB = service.findAll();
 		
-		/*List<PostModel> posts = new ArrayList<PostModel>();
-		PostModel firstPost = new PostModel();
-		firstPost.setImageLocation("/images/20220320144833tumblr_na1mmnDx9i1txue1qo1_540.jpg");
-		firstPost.setUsername("dtrowbri");
-		firstPost.setPostedOn(LocalDateTime.now());
-		
-		PostModel firstResponse = new PostModel();
-		firstResponse.setImageLocation("/images/20220320151633FirstPost.JPG");
-		firstResponse.setUsername("Daniel");
-		firstResponse.setPostedOn(LocalDateTime.now());
-		firstPost.addResponse(firstResponse);
-		
-		PostModel secondResponse = new PostModel();
-		secondResponse.setImageLocation("/images/20220320152658o-when-you-praise-the-sun-just-right-imgur-52363068.png");
-		secondResponse.setUsername("Erick");
-		secondResponse.setPostedOn(LocalDateTime.now());
-		firstPost.addResponse(secondResponse);
-		
-		PostModel secondPost = new PostModel();
-		secondPost.setImageLocation("/images/20220320153008index2.jpg");
-		secondPost.setUsername("MemeLord");
-		secondPost.setPostedOn(LocalDateTime.now());
-
-		posts.add(firstPost);
-		posts.add(secondPost);*/
-		
 		model.addAttribute("memes", postsFromDB);
 		model.addAttribute("title", "Main Wall");
 		
@@ -99,12 +73,16 @@ public class HomeController {
 	}
 	
 	@PostMapping("/postLike")
-	public String postLike() {
+	public String postLike(PostModel post) {
+		post.setNumberOfLikes(post.getNumberOfLikes() + 1);
+		service.update(post);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/postDislike")
-	public String postDislike() {
+	public String postDislike(PostModel post) {
+		post.setNumberOfDislikes(post.getNumberOfDislikes() + 1);
+		service.update(post);
 		return "redirect:/";
 	}
 	
