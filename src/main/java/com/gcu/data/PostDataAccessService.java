@@ -50,6 +50,12 @@ public class PostDataAccessService implements DataAccessInterface<PostModel> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public PostModel findByUserName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public boolean create(PostModel post) {

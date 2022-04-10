@@ -27,4 +27,9 @@ public class SpringConfig {
 	public ResetPasswordServiceInterface getResetPasswordInterface() {
 		return new ResetPasswordService();
 	}
+	
+	@Bean("AccountUpdateServiceInterface")
+	public AccountUpdateServiceInterface getAccountUpdateService() {
+		return new AccountUpdateService();
+	}
 }

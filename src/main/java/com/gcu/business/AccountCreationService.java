@@ -23,8 +23,6 @@ public class AccountCreationService implements RegistrationBusinessServiceInterf
 	
 	/**
 	 * Compare the entered username to the database to make sure the name is available
-	 * 
-	 * Currently only compares against the "admin" username 
 	 */
 	@Override
 	public boolean isUserNameTaken(@Valid UserModel userModel) {

@@ -62,7 +62,34 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 				user.setUsername(srs.getString("UserName"));
 				user.setfName(srs.getString("FirstName"));
 				user.setlName(srs.getString("LastName"));
-				user.setEmail(srs.getString("Address"));
+				user.setEmail(srs.getString("Email"));
+				user.setAddress(srs.getString("Address"));
+				user.setPhone(srs.getString("Phone"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	@Override
+	public UserModel findByUserName(String username) {
+		
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+		Object[] params = new Object[] {username};
+		
+		UserModel user = new UserModel();
+		
+		try {
+			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql, params);
+			if(srs.next()) {
+				user.setUserId(srs.getInt("UserId"));
+				user.setPassword(srs.getString("Password"));
+				user.setUsername(srs.getString("UserName"));
+				user.setfName(srs.getString("FirstName"));
+				user.setlName(srs.getString("LastName"));
+				user.setEmail(srs.getString("Email"));
+				user.setAddress(srs.getString("Address"));
 				user.setPhone(srs.getString("Phone"));
 			}
 		} catch(Exception e) {
