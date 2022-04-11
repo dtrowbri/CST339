@@ -121,26 +121,26 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	}
 
 	@Override
-	public boolean update(UserModel user) {
+    public boolean update(UserModel user) {
 
-		String sql = "UPDATE USERS SET `FIRSTNAME` = ?, `LASTNAME` = ?, `EMAIL` = ?, `ADDRESS` = ?, `PHONE` = ? WHERE `USERID` = ?";
-		
-		int numOfRows = 0;
-		Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()};
-		int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.INTEGER};
-		
-		try{
-			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(numOfRows == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        String sql = "UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, ADDRESS = ?, PHONE = ? WHERE USERNAME = ?";
+
+        int numOfRows = 0;
+        Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUsername()};
+        int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
+
+        try{
+            numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        if(numOfRows == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 	@Override
 	public boolean delete(UserModel user) {
