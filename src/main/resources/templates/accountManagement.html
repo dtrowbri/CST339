@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Confirmation</title>
+	</head>
+	<body>
+	<div layout:fragment="content">
+	  	<table style="width:20%">
+	  		<tbody>
+		  		<tr>
+		  			<td><strong>Username: </strong></td>
+	  				<td><h5 th:text="${user.username}"></h5></td>
+	  			<tr>
+	  				<td><strong>First Name: </strong></td>
+	  				<td><h5 th:text="${user.fName}"></h5></td>
+	  			</tr>
+	  				<td><strong>Last Name: </strong></td>
+	  				<td><h5 th:text="${user.lName}"></h5></td>
+	  			<tr>
+	  				<td><strong>Email: </strong></td>
+	  				<td><h5 th:text="${user.email}"></h5></td>
+	  			</tr>
+	  			<tr>
+	  				<td><strong>Address: </strong></td>
+	  				<td><h5 th:text="${user.address}"></h5></td>
+	  			</tr>
+	  			<tr>
+	  				<td><strong>Phone #: </strong></td>
+	  				<td><h5 th:text="${user.phone}"></h5></td>
+	  			</tr>
+	  			<tr>
+	  				<td><small><a href="/account/editAccount">Edit Account</a></small></td>
+	  				<td><small><a href="/login/ResetPassword">Change Password</a></small></td>
+	  		</tbody>
+	  	</table>
+	</div>
+	</body>
+</html>
