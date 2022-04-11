@@ -6,12 +6,8 @@
 	</head>
 	<body>
 		<div layout:fragment="content">
-		  	<form action="#" th:action="@{updateUserInfo}" th:object="${user}" method="post">
+		  	<form action="#" th:action="@{updateUserInfo}" th:object="${userModel}" method="post">
 				<table>
-					<tr>
-		  				<td>Username:</td><td><input type="text" th:field="*{username}" ></td>
-		  				<td><h5 style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</h5></td>
-		  			</tr>
 		  			<tr>
 		  				<td>First Name:</td><td><input type="text" th:field="*{fName}" ></td>
 		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('fName')}" th:errors="*{fName}">First Name Error</h5></td>

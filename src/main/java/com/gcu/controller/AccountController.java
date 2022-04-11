@@ -56,7 +56,7 @@ public class AccountController {
 	@GetMapping("/editAccount")
 	public String editAccount(Model model) {
 		model.addAttribute("title", "Edit Account");
-		model.addAttribute("user", user);
+		model.addAttribute("userModel", user);
 		return "editAccount";
 	}
 	

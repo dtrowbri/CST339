@@ -123,7 +123,7 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	@Override
 	public boolean update(UserModel user) {
 
-		String sql = "UPDATE USERS `FIRSTNAME` = ?, `LASTNAME` = ?, `EMAIL` = ?, `ADDRESS` = ?, `PHONE` = ? WHERE `USERID` = ?";
+		String sql = "UPDATE USERS SET `FIRSTNAME` = ?, `LASTNAME` = ?, `EMAIL` = ?, `ADDRESS` = ?, `PHONE` = ? WHERE `USERID` = ?";
 		
 		int numOfRows = 0;
 		Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()};
