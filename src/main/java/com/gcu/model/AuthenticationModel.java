@@ -11,7 +11,7 @@ public class AuthenticationModel {
 	@NotNull(message="Password is a required field")
 	@Size(min=1, max=32, message="Password must be between 1 and 32 characters")
 	String password;
-	
+
 	public AuthenticationModel() {
 		
 	}
@@ -20,6 +20,7 @@ public class AuthenticationModel {
 		this.setUsername(username);
 		this.setPassword(password);
 	}
+
 
 	public String getUsername() {
 		return username;
@@ -36,6 +37,5 @@ public class AuthenticationModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	
 }

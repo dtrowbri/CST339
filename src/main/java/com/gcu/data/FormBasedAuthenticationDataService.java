@@ -44,4 +44,25 @@ public class FormBasedAuthenticationDataService implements AuthenticationDataAcc
 		return passwordValid;
 	}
 
+	@Override
+	public boolean DoesAccountExist(AuthenticationModel authenticationModel) {
+		String sql = "SELECT * FROM `USERS` WHERE `USERNAME` = ?";
+		
+		Object[] params = new Object[] {authenticationModel.getUsername()};
+		int[] dataTypes = new int[] {Types.NVARCHAR};
+		
+		try {
+			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql, params, dataTypes);
+			if(srs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
 }

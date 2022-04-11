@@ -3,6 +3,7 @@ package com.gcu;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.gcu.business.*;
+import com.gcu.business.*;
 
 @Configuration
 public class SpringConfig {
@@ -20,5 +21,10 @@ public class SpringConfig {
 	@Bean("postServiceInterface")
 	public PostServiceInterface getPostServer() {
 		return new PostService();
+	}
+	
+	@Bean("ResetPasswordInterface")
+	public ResetPasswordServiceInterface getResetPasswordInterface() {
+		return new ResetPasswordService();
 	}
 }

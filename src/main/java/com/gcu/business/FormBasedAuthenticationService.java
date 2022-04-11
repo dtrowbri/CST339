@@ -12,6 +12,7 @@ import com.gcu.data.AuthenticationDataAccessInterface;
 public class FormBasedAuthenticationService implements AuthenticationBusinessServiceInterface {
 	
 	@Autowired AuthenticationDataAccessInterface service;
+	@Autowired RegistrationBusinessServiceInterface regService;
 	
 	public FormBasedAuthenticationService() {
 		
@@ -29,7 +30,11 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 	
 	@Override
 	public boolean Authenticate(@Valid AuthenticationModel authenticationModel) {
-		return service.AuthenticateUser(authenticationModel);
+		if(service.DoesAccountExist(authenticationModel)) {
+			return service.AuthenticateUser(authenticationModel);
+		} else {
+			return false;
+		}
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.gcu.data.DataAccessInterface;
 import com.gcu.model.UserModel;
+import com.gcu.model.UserModel;
 
 public class AccountCreationService implements RegistrationBusinessServiceInterface {
 	
@@ -27,12 +28,15 @@ public class AccountCreationService implements RegistrationBusinessServiceInterf
 	 */
 	@Override
 	public boolean isUserNameTaken(@Valid UserModel userModel) {
-		if (!userModel.getUsername().equals("admin")) {
-			return true;
-		} 
-		else {
-			return false;
+		List<UserModel> users = service.findAll();
+		
+		for(UserModel user : users) {
+			if(user.getUsername().equalsIgnoreCase(userModel.getUsername())) {
+				return true;
+			}
 		}
+		
+		return false;
 	}
 
 	@Override
