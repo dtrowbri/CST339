@@ -1,6 +1,10 @@
 <html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 <head>
 <style>
+        body{
+		background-color: lightblue;
+}
+        
         #meme{
             background-color: #0b142d;
             background-image: linear-gradient(#0b142d, #3094b2);
@@ -91,7 +95,9 @@
 </head>
 <body>
 	<!--Upload control for memes-->
-	<div layout:fragment="content" style="margin-bottom: 50px;">
+
+	<div layout:fragment="content" style="margin-top: 150px;">
+<h1>Main Wall</h1>
 		<div style="border: 1px solid black; width: 400px;">
 			<h3>Post Your Meme</h3>
 			<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
