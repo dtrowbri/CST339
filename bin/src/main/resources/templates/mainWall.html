@@ -1,96 +1,5 @@
 <html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
-<head>
-<style>
-        #meme{
-            background-color: #0b142d;
-            background-image: linear-gradient(#0b142d, #3094b2);
-            display: block;
-            width: 720px;
-            height: auto;
-            margin: 0% auto 30px auto;
-            padding: 20px;
-            border: solid #0b142d 3px;
-            border-radius: 24px;
-        }
-        #meme img{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-
-            width: 100%;
-            
-        }
-        #meme ol{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: normal;
-            align-content: stretch;
-            margin-left: -38px;
-        }
-        #meme .item{
-
-            padding-top: 20px;
-            padding-bottom: 20px;
-            padding-right: 20px;
-            padding-left: 20px;
-            border-bottom: #0b142d 30px solid;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .item{
-            font-size: x-large;
-            font-family:Arial;
-        }
-        .item:nth-child(1){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: greenyellow;
-        }
-        .item:nth-child(2){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: red;
-        }
-        .item:nth-child(3){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: yellow;
-            
-       /* }
-        .item:nth-child(4){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-
-        }
-        .YEET{
-            background-color: black;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            color: aquamarine;
-            font-size: 40px;*/
-        }
-
-    </style>
-</head>
 <body>
-	<!--Upload control for memes-->
 	<div layout:fragment="content" style="margin-bottom: 50px;">
 		<div style="border: 1px solid black; width: 400px;">
 			<h3>Post Your Meme</h3>
@@ -100,21 +9,16 @@
 			</form>
 		</div >
 		<div>
-		<!--Section where memes are posted-->
-			<section id="meme-wall" th:each="meme : ${memes}">
-			
-				<div id="meme">
+			<div th:each="meme : ${memes}">
+				<div style="border: 1px solid black; width: 400px; margin-top: 20px;">
 					<div>
-						<p style="color:azure" th:text="${meme.getUsername()}"></p><p style="color:azure" th:text="${meme.getFormattedDate()}" ></p>
+						<p th:text="${meme.getUsername()}"></p><p th:text="${meme.getFormattedDate()}" ></p>
 					</div>
-					
 					<div>
-					<!--Main image for meme-->
-						<img th:src=${meme.getImageLocation()}/>
+						<img th:src=${meme.getImageLocation()} style="width:300px; height: 300px;" />
 					</div>
 					<div style="display: inline-block;">
 						<div style="display: inline-block;">
-							
 							<form action="#" th:action="@{postLike}" method="Post">
 								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
 							</form > 
@@ -129,11 +33,12 @@
 								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
 							</form> 
 						</div>
-						   <ol>
-				                <li id="dank" class="item"><span>Dank 👌</span> </li>
-				                <li id="sucks" class="item"><span>Sucks 💩</span> </li>
-				                <li id="spread" class="item"><span>Spread 🦞</span> </li>
-				          	</ol>
+					</div >
+					<div >
+						<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST" style="margin: 0">
+							<input type="file" name="meme" style="display: inline-block;">
+							<button type="submit" style="display: inline-block;">Upload Meme</button>
+						</form>
 					</div >
 					<div th:each="subpost : ${meme.getResponses()}">
 						<div style="border: 1px solid black">
@@ -171,7 +76,7 @@
 						</div >
 					</div>
 				</div>
-			</section>
+			</div>
 		</div>
 	</div >
 </body>

@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form action="#" th:action="@{authenticate}" method="POST" th:object="${AuthenticationModel}">
+			<table>
+				<tr>
+					<td>User Name:</td>
+					<td><input type="text" th:field="*{username}" /></td>
+					
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="text" th:field="*{password}"/></td>
+					
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="Login"></td>
+				</tr>
+
+			</table>
+		</form>
+	</div>
+</body>

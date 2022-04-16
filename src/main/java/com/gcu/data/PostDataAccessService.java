@@ -35,7 +35,6 @@ public class PostDataAccessService implements DataAccessInterface<PostModel> {
 						srs.getInt("NumberOfLikes"),
 						srs.getInt("NumberOfDislikes"),
 						srs.getTimestamp("PostedOn").toLocalDateTime()));
-				
 			}	
 		}catch(Exception e) {
 			e.printStackTrace();
