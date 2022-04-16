@@ -62,7 +62,34 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 				user.setUsername(srs.getString("UserName"));
 				user.setfName(srs.getString("FirstName"));
 				user.setlName(srs.getString("LastName"));
-				user.setEmail(srs.getString("Address"));
+				user.setEmail(srs.getString("Email"));
+				user.setAddress(srs.getString("Address"));
+				user.setPhone(srs.getString("Phone"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	@Override
+	public UserModel findByUserName(String username) {
+		
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+		Object[] params = new Object[] {username};
+		
+		UserModel user = new UserModel();
+		
+		try {
+			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql, params);
+			if(srs.next()) {
+				user.setUserId(srs.getInt("UserId"));
+				user.setPassword(srs.getString("Password"));
+				user.setUsername(srs.getString("UserName"));
+				user.setfName(srs.getString("FirstName"));
+				user.setlName(srs.getString("LastName"));
+				user.setEmail(srs.getString("Email"));
+				user.setAddress(srs.getString("Address"));
 				user.setPhone(srs.getString("Phone"));
 			}
 		} catch(Exception e) {
@@ -94,26 +121,26 @@ public class UserDataService implements DataAccessInterface<UserModel> {
 	}
 
 	@Override
-	public boolean update(UserModel user) {
+    public boolean update(UserModel user) {
 
-		String sql = "UPDATE USERS SET `FIRSTNAME` = ?, `LASTNAME` = ?, `EMAIL` = ?, `ADDRESS` = ?, `PHONE` = ? WHERE `USERNAME` = ?";
-		
-		int numOfRows = 0;
-		Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUsername()};
-		int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
-		
-		try{
-			numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(numOfRows == 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        String sql = "UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, ADDRESS = ?, PHONE = ? WHERE USERNAME = ?";
+
+        int numOfRows = 0;
+        Object[] params = new Object[] {user.getfName(), user.getlName(), user.getEmail(), user.getAddress(), user.getPhone(), user.getUsername()};
+        int[] dataTypes = new int[] {Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR, Types.NVARCHAR};
+
+        try{
+            numOfRows = this.jdbcTemplateObject.update(sql, params, dataTypes);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        if(numOfRows == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 	@Override
 	public boolean delete(UserModel user) {

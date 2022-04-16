@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Update User Information</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+		  	<form action="#" th:action="@{updateUserInfo}" th:object="${userModel}" method="post">
+				<table>
+					<tr hidden>
+						<td><input type="text" th:field="*{username}" ></td>
+					</tr>
+		  			<tr>
+		  				<td>First Name:</td><td><input type="text" th:field="*{fName}" ></td>
+		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('fName')}" th:errors="*{fName}">First Name Error</h5></td>
+		  			</tr>
+		  			<tr>
+		  				<td>Last Name:</td><td><input type="text" th:field="*{lName}" ></td>
+		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('lName')}" th:errors="*{lName}">Last Name Error</h5></td>
+		  			</tr>
+		  			<tr>
+		  				<td>Email:</td><td><input type="text" th:field="*{email}" ></td>
+		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</h5></td>
+		  			</tr>
+		  			<tr>
+		  				<td>Address:</td><td><input type="text" th:field="*{address}" ></td>
+		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</h5></td>
+		  			</tr>
+		  			<tr>
+		  				<td>Phone #:</td><td><input type="text" th:field="*{phone}" ></td>
+		  				<td><h5 style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</h5></td>
+		  			</tr>
+		  			<tr>
+		  				<td colspan="2"><input type="submit" value="Submit" /></td>
+		  			</tr>
+				</table>
+				<div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+		  		<div th:each="err : ${#fields.errors('*')}">
+		  			<span style="color:red" th:text="${err}" class="fieldError"></span>
+		  		</div>
+			</form>
+		</div>
+	</body>
+</html>
