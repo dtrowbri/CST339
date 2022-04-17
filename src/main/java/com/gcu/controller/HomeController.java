@@ -40,6 +40,8 @@ public class HomeController {
 		List<PostModel> postsFromDB = service.findAll();
 		
 		model.addAttribute("memes", postsFromDB);
+
+		//Set Title for Main Page
 		model.addAttribute("title", "Main Wall");
 		
 		return "mainWall";

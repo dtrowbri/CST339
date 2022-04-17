@@ -3,13 +3,17 @@
 <style>
         body{
 		background-color: lightblue;
-}
+		}
+		h1, h2, h3, h4, h5, h6{
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
         
         #meme{
             background-color: #0b142d;
             background-image: linear-gradient(#0b142d, #3094b2);
             display: block;
-            width: 720px;
+            width: 560px;
             height: auto;
             margin: 0% auto 30px auto;
             padding: 20px;
@@ -96,8 +100,8 @@
 <body>
 	<!--Upload control for memes-->
 
-	<div layout:fragment="content" style="margin-top: 150px;">
-<h1>Main Wall</h1>
+	<div layout:fragment="content" >
+
 		<div style="border: 1px solid black; width: 400px;">
 			<h3>Post Your Meme</h3>
 			<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
