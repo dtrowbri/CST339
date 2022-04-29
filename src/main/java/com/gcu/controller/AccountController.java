@@ -48,7 +48,7 @@ public class AccountController {
 		model.addAttribute("title", "Account Management");
 		model.addAttribute("user", user);
 		
-		return "accountManagement";		
+		return "editAccount";		
 	}
 	
 	@PostMapping("/AccountAuthentication")
@@ -76,13 +76,14 @@ public class AccountController {
 	}
 	
 	@PostMapping("/updateUserInfo")
-	public String updateUserInfo(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+	public String updateUserInfo(@Valid UserModel userModel, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		if(bindingResult.hasErrors()) {
 			return "editAccount";
 		}
 		if (updateService.updateUser(userModel)) {
 			model.addAttribute("title", "Account Management");
 			model.addAttribute("user", userModel);
+			request.getSession().setAttribute("user", userModel);
 			return "accountManagement";
 		} else {
 			model.addAttribute("title", "Edit Account");

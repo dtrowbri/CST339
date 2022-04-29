@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div layout:fragment="content">
-		  	<form action="#" th:action="@{updateUserInfo}" th:object="${userModel}" method="post">
+		  	<form action="#" th:action="@{updateUserInfo}" th:object="${user}" method="post">
 				<table>
 					<tr hidden>
 						<td><input type="text" th:field="*{username}" ></td>
