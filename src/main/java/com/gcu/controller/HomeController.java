@@ -20,8 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gcu.model.PostModel;
+import com.gcu.model.UserModel;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.ArrayList;
 import com.gcu.business.PostService;
 import com.gcu.business.PostServiceInterface;

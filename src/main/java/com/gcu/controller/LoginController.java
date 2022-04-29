@@ -1,5 +1,7 @@
 package com.gcu.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import com.gcu.business.AuthenticationBusinessServiceInterface;
 import com.gcu.business.ResetPasswordServiceInterface;
 import com.gcu.model.AuthenticationModel;
 import com.gcu.model.ResetPasswordModel;
+import com.gcu.model.UserModel;
+import com.mysql.cj.Session;
 
 
 
@@ -35,12 +39,16 @@ public class LoginController {
 		}	
 		
 		@PostMapping("/authenticate")
-		public String authenticate(@Valid AuthenticationModel authenticationModel, BindingResult bindingResult, Model model) {
+		public String authenticate(@Valid AuthenticationModel authenticationModel, BindingResult bindingResult, Model model, HttpServletRequest request) {
+			
+			
 			
 			if(bindingResult.hasErrors()) {
 				return "login";
 			}
 			if(authenticationService.Authenticate(authenticationModel)) {
+				UserModel user = authenticationService.RetrieveUserAccount(authenticationModel);
+				request.getSession().setAttribute("user", user);
 				model.addAttribute("title", "Main Wall");
 				return "redirect:/";
 			} else {

@@ -3,6 +3,7 @@ package com.gcu.business;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.gcu.data.DataAccessInterface;
 import com.gcu.model.AuthenticationModel;
@@ -13,6 +14,11 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 	
 	@Autowired AuthenticationDataAccessInterface service;
 	@Autowired RegistrationBusinessServiceInterface regService;
+	
+	@Autowired 
+	@Qualifier("UserDataAccess")
+	DataAccessInterface userService;
+
 	
 	public FormBasedAuthenticationService() {
 		
@@ -35,6 +41,11 @@ public class FormBasedAuthenticationService implements AuthenticationBusinessSer
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public UserModel RetrieveUserAccount(@Valid AuthenticationModel authenticationModel) {
+		return (UserModel)userService.findByUserName(authenticationModel.getUsername());
 	}
 	
 }

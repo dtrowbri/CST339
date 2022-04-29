@@ -7,5 +7,5 @@ import com.gcu.model.UserModel;
 public interface AuthenticationBusinessServiceInterface {
 
 	public boolean Authenticate(@Valid AuthenticationModel authenticationModel);
-	
+	public UserModel RetrieveUserAccount(@Valid AuthenticationModel authenticationModel);
 }
