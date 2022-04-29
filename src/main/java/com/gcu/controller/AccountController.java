@@ -1,5 +1,6 @@
 package com.gcu.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,24 @@ public class AccountController {
 	private UserModel user;
 	
 	@GetMapping("/")
-	public String displayModel(Model model) {
+	public String displayModel(Model model, HttpServletRequest request) {
+		UserModel user;
+		
+		if(request.getSession().getAttribute("user") != null) {
+			user = (UserModel)request.getSession().getAttribute("user");
+		} else {
+			return "redirect:/login/";
+		}
+		
+		
 		// display login form view
-		model.addAttribute("title", "Account Login");
-		model.addAttribute("authenticationModel", new AuthenticationModel());
-		return "account";		
+		//model.addAttribute("title", "Account Login");
+		//model.addAttribute("authenticationModel", new AuthenticationModel());
+		
+		model.addAttribute("title", "Account Management");
+		model.addAttribute("user", user);
+		
+		return "accountManagement";		
 	}
 	
 	@PostMapping("/AccountAuthentication")

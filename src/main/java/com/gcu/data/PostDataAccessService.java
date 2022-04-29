@@ -23,7 +23,7 @@ public class PostDataAccessService implements DataAccessInterface<PostModel> {
 	
 	@Override
 	public List<PostModel> findAll() {
-		String sql = "SELECT * FROM POSTS";
+		String sql = "SELECT * FROM POSTS ORDER BY `POSTEDON` DESC";
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
 			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql);

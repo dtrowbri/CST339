@@ -52,7 +52,14 @@ public class HomeController {
 	}
 	
 	@PostMapping("/postMeme")
-	public String postMeme(@RequestParam("meme") MultipartFile meme, RedirectAttributes attributes) {
+	public String postMeme(@RequestParam("meme") MultipartFile meme, RedirectAttributes attributes, HttpServletRequest request) {
+		
+		UserModel user;
+		if(request.getSession().getAttribute("user") != null) {
+			user = (UserModel)request.getSession().getAttribute("user");
+		} else {
+			return "redirect:/login/";
+		}
 		
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
