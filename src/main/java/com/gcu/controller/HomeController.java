@@ -77,7 +77,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-		PostModel post = new PostModel(1, fileNameReferencePath, now);
+		PostModel post = new PostModel(user.getUserId(), fileNameReferencePath, now);
 		boolean postSucceeded = service.create(post);
 		System.out.println(postSucceeded);
 		

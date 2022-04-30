@@ -1,85 +1,100 @@
-<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/defaultTemplate">
+
 <head>
-<style>
-        body{
-		background-color: lightblue;
+	<style>
+		body {
+			background-color: lightblue;
 		}
-		h1, h2, h3, h4, h5, h6{
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
 			margin-top: 0px;
 			margin-bottom: 0px;
 		}
-        
-        #meme{
-            background-color: #0b142d;
-            background-image: linear-gradient(#0b142d, #3094b2);
-            display: block;
-            width: 560px;
-            height: auto;
-            margin: 0% auto 30px auto;
-            padding: 20px;
-            border: solid #0b142d 3px;
-            border-radius: 24px;
-        }
-        #meme img{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+
+		#meme {
+			background-color: #0b142d;
+			background-image: linear-gradient(#0b142d, #3094b2);
+			display: block;
+			width: 560px;
+			height: auto;
+			margin: 0% auto 30px auto;
+			padding: 20px;
+			border: solid #0b142d 3px;
+			border-radius: 24px;
+		}
+
+		#meme img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
 			border: solid 0px;
 			border-radius: 24px;
-            width: 100%;
-            
-        }
-        #meme ol{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: normal;
-            align-content: stretch;
-            margin-left: -38px;
-        }
-        #meme .item{
+			width: 100%;
 
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 20px;
-            padding-left: 20px;
-            border-bottom: #0b142d 5px solid;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .item{
-            font-size: x-large;
-            font-family:Arial;
-        }
-        .item:nth-child(1){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: greenyellow;
-        }
-        .item:nth-child(2){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: red;
-        }
-        .item:nth-child(3){
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-            background-color: yellow;
-            
-       /* }
+		}
+
+		#meme ol {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: normal;
+			align-content: stretch;
+			margin-left: -38px;
+		}
+
+		#meme .item {
+
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-right: 20px;
+			padding-left: 20px;
+			border-bottom: #0b142d 5px solid;
+			margin: 10px;
+			cursor: pointer;
+		}
+
+		.item {
+			font-size: x-large;
+			font-family: Arial;
+		}
+
+		.item:nth-child(1) {
+			display: block;
+			flex-grow: 0;
+			flex-shrink: 1;
+			flex-basis: auto;
+			align-self: auto;
+			order: 0;
+			background-color: greenyellow;
+		}
+
+		.item:nth-child(2) {
+			display: block;
+			flex-grow: 0;
+			flex-shrink: 1;
+			flex-basis: auto;
+			align-self: auto;
+			order: 0;
+			background-color: red;
+		}
+
+		.item:nth-child(3) {
+			display: block;
+			flex-grow: 0;
+			flex-shrink: 1;
+			flex-basis: auto;
+			align-self: auto;
+			order: 0;
+			background-color: yellow;
+
+			/* }
         .item:nth-child(4){
             display: block;
             flex-grow: 0;
@@ -94,65 +109,71 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: aquamarine;
             font-size: 40px;*/
-        }
-
-    </style>
+		}
+	</style>
 </head>
+
 <body>
 	<!--Upload control for memes-->
 
-	<div layout:fragment="content" >
+	<div layout:fragment="content">
 
-		<div style="border: solid 0px ; border-radius:30px; background-color: rgb(118, 180, 231); width: 530px; padding:40px; margin-bottom:20px;">
+		<div
+			style="border: solid 0px ; border-radius:30px; background-color: rgb(118, 180, 231); width: 530px; padding:40px; margin-bottom:20px;">
 			<h3>Post Your Meme</h3>
 			<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
 				<input type="file" name="meme" style="display: inline-block;">
 				<button type="submit" style="display: inline-block;">Upload Meme</button>
 			</form>
-		</div >
+		</div>
 		<div>
-		<!--Section where memes are posted-->
+			<!--Section where memes are posted-->
 			<section id="meme-wall" th:each="meme : ${memes}">
-			
+
 				<div id="meme">
 					<div>
-						<p style="color:azure" th:text="${meme.getUsername()}"></p><p style="color:azure" th:text="${meme.getFormattedDate()}" ></p>
+						<p style="color:azure" th:text="${meme.getUsername()}"></p>
+						<p style="color:azure" th:text="${meme.getFormattedDate()}"></p>
 					</div>
-					
+
 					<div>
-					<!--Main image for meme-->
-						<img th:src=${meme.getImageLocation()}/>
+						<!--Main image for meme-->
+						<img th:src=${meme.getImageLocation()} />
 					</div>
 					<div style="display: inline-block;">
 						<div style="display: inline-block; margin-top:20px">
-					
+
 							<form action="#" th:action="@{postLike}" method="Post">
-								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-							</form > 
+								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;"
+									alt="Submit">
+							</form>
 						</div>
 						<div style="display: inline-block;">
-						
+
 							<form action="#" th:action="@{postDislike}" method="Post">
-								<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-							</form > 
+								<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;"
+									alt="Submit">
+							</form>
 						</div>
 						<div style="display: inline-block;">
-					
+
 							<form action="#" th:action="@{postShare}" method="Post">
-								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-							</form> 
+								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;"
+									alt="Submit">
+							</form>
 						</div>
-	<!--							<ol>
+						<!--							<ol>
 				                	<li id="dank" class="item"><span>Dank 👌</span> </li>
 				                	<li id="sucks" class="item"><span>Sucks 💩</span> </li>
 				                	<li id="spread" class="item"><span>Spread 🦞</span> </li>
 				          		</ol>-->
-					</div >
+					</div>
 					<div th:each="subpost : ${meme.getResponses()}">
 						<div style="border: 1px solid black">
 							<div style="margin-left:30px">
 								<div>
-									<p th:text="${subpost.getUsername()}"></p><p th:text="${subpost.getFormattedDate()}" ></p>
+									<p th:text="${subpost.getUsername()}"></p>
+									<p th:text="${subpost.getFormattedDate()}"></p>
 								</div>
 								<div>
 									<img th:src=${subpost.getImageLocation()} style="width:250px; height: 250px;" />
@@ -160,33 +181,38 @@
 								<div style="display: inline-block;">
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postLike}" method="Post">
-											<input id="dank" class="item" type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-										</form > 
+											<input id="dank" class="item" type="image" src="/Icons/ThumbsUpIcon.JPG"
+												style="width:50px; height: 50px;" alt="Submit">
+										</form>
 									</div>
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postDislike}" method="Post">
-											<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-										</form > 
+											<input type="image" src="/Icons/ThumbsDownIcon.JPG"
+												style="width:50px; height: 50px;" alt="Submit">
+										</form>
 									</div>
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postShare}" method="Post">
-											<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;" alt="Submit">
-										</form> 
+											<input type="image" src="/Icons/shareIcon.JPG"
+												style="width:50px; height: 50px;" alt="Submit">
+										</form>
 									</div>
-								</div >
+								</div>
 
 								<div>
-									<form action="#" th:action="@{postMeme}" enctype="multipart/form-data" method="POST">
+									<form action="#" th:action="@{postMeme}" enctype="multipart/form-data"
+										method="POST">
 										<input type="file" name="meme" style="display: inline-block;">
 										<button type="submit" style="display: inline-block;">Upload Meme</button>
 									</form>
 								</div>
 							</div>
-						</div >
+						</div>
 					</div>
 				</div>
 			</section>
 		</div>
-	</div >
+	</div>
 </body>
+
 </html>
