@@ -5,9 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import com.gcu.business.*;
 import com.gcu.data.DataAccessInterface;
 import com.gcu.data.UserDataService;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.gcu.business.*;
 
 @Configuration
+@EnableEncryptableProperties
 public class SpringConfig {
 	
 	@Bean("authenticationBusinessServiceInterface")
