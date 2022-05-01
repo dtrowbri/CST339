@@ -46,8 +46,28 @@ public class PostDataAccessService implements DataAccessInterface<PostModel> {
 
 	@Override
 	public PostModel findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM POSTS WHERE `POSTID` = ?";
+		
+		Object[] params = new Object[] {id};
+		PostModel post = new PostModel();
+		
+		try {
+			SqlRowSet srs = this.jdbcTemplateObject.queryForRowSet(sql, params);
+			if(srs.next()) {
+				post = new PostModel(srs.getLong("PostId"),
+						srs.getLong("parentPostId"),
+						srs.getInt("UserId"),
+						srs.getString("ImageLocation"),
+						srs.getInt("NumberOfLikes"),
+						srs.getInt("NumberOfDislikes"),
+						srs.getTimestamp("PostedOn").toLocalDateTime());
+			}	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return post;
 	}
 	
 	@Override

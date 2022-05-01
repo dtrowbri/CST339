@@ -71,36 +71,81 @@ public class HomeController {
 		try {
 		    Path path = Paths.get(imageDir + filename);
 			Files.copy(meme.getInputStream(), path);
-			PostModel newPost = new PostModel("admin", fileNameReferencePath, now);
-			System.out.println(fileNameReferencePath);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		PostModel post = new PostModel(user.getUserId(), fileNameReferencePath, now);
 		boolean postSucceeded = service.create(post);
-		System.out.println(postSucceeded);
+
+		return "redirect:/";
+	}
+	
+	@PostMapping("/postResponse")
+	public String postResponse(@RequestParam("meme") MultipartFile meme, @RequestParam("id") long parentId, RedirectAttributes attributes, HttpServletRequest request) {
+		UserModel user;
+		if(request.getSession().getAttribute("user") != null) {
+			user = (UserModel)request.getSession().getAttribute("user");
+		} else {
+			return "redirect:/login/";
+		}
 		
-		System.out.println(filename);
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		String timeNowStr = dateTimeFormatter.format(now);
+		String filename = StringUtils.cleanPath(meme.getOriginalFilename());
+		filename = timeNowStr + filename;
+		String fileNameReferencePath = "/images/" + filename;
+		
+		try {
+		    Path path = Paths.get(imageDir + filename);
+			Files.copy(meme.getInputStream(), path);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		PostModel post = new PostModel(user.getUserId(), fileNameReferencePath, now);
+		post.setParentPostId(parentId);
+		boolean postSucceeded = service.create(post);
+
 		return "redirect:/";
 	}
 	
 	@PostMapping("/postLike")
-	public String postLike(PostModel post) {
+	public String postLike(int postId) {
+		PostModel post = service.findById(postId);
 		post.setNumberOfLikes(post.getNumberOfLikes() + 1);
 		service.update(post);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/postDislike")
-	public String postDislike(PostModel post) {
+	public String postDislike(int postId) {
+		PostModel post = service.findById(postId);
 		post.setNumberOfDislikes(post.getNumberOfDislikes() + 1);
 		service.update(post);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/postShare")
-	public String postShare() {
+	public String postShare(int postId, HttpServletRequest request) {
+		UserModel user;
+		if(request.getSession().getAttribute("user") != null) {
+			user = (UserModel)request.getSession().getAttribute("user");
+		} else {
+			return "redirect:/login/";
+		}
+		
+		PostModel post = service.findById(postId);
+		PostModel newPost = new PostModel();
+		
+		newPost.setImageLocation(post.getImageLocation());
+		newPost.setUserId(user.getUserId());
+		newPost.setUsername(user.getUsername());
+		newPost.setPostedOn(LocalDateTime.now());
+		
+		boolean shareSucceeded = service.create(newPost);
+		
 		return "redirect:/"; 
 	}
 }

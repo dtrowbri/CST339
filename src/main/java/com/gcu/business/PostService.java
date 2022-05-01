@@ -65,7 +65,7 @@ public class PostService implements PostServiceInterface {
 	@Override
 	public PostModel findById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (PostModel) service.findById(id);
 	}
 
 	@Override

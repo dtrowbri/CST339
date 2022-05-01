@@ -144,20 +144,25 @@
 						<div style="display: inline-block; margin-top:20px">
 
 							<form action="#" th:action="@{postLike}" method="Post">
+								<input type="hidden" name="postId" th:value="${meme.getId()}">
 								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;"
 									alt="Submit">
+								<p th:text="${meme.getNumberOfLikes()}"></p>
 							</form>
 						</div>
 						<div style="display: inline-block;">
 
 							<form action="#" th:action="@{postDislike}" method="Post">
+								<input type="hidden" name="postId" th:value="${meme.getId()}">
 								<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;"
 									alt="Submit">
+								<p th:text="${meme.getNumberOfDislikes()}"></p>
 							</form>
 						</div>
 						<div style="display: inline-block;">
 
 							<form action="#" th:action="@{postShare}" method="Post">
+								<input type="hidden" name="postId" th:value="${meme.getId()}">
 								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;"
 									alt="Submit">
 							</form>
@@ -167,6 +172,14 @@
 				                	<li id="sucks" class="item"><span>Sucks 💩</span> </li>
 				                	<li id="spread" class="item"><span>Spread 🦞</span> </li>
 				          		</ol>-->
+		        		<div>
+							<form action="#" th:action="@{postResponse}" enctype="multipart/form-data"
+								method="POST">
+								<input type="file" name="meme" style="display: inline-block;">
+								<input type="hidden" name="id" th:value="${meme.getId()}">
+								<button type="submit" style="display: inline-block;">Upload Meme</button>
+							</form>
+						</div>
 					</div>
 					<div th:each="subpost : ${meme.getResponses()}">
 						<div style="border: 1px solid black">
@@ -181,18 +194,23 @@
 								<div style="display: inline-block;">
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postLike}" method="Post">
+											<input type="hidden" name="postId" th:value="${subpost.getId()}">
 											<input id="dank" class="item" type="image" src="/Icons/ThumbsUpIcon.JPG"
 												style="width:50px; height: 50px;" alt="Submit">
+											<p th:text="${subpost.getNumberOfLikes()}"></p>
 										</form>
 									</div>
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postDislike}" method="Post">
+											<input type="hidden" name="postId" th:value="${subpost.getId()}">
 											<input type="image" src="/Icons/ThumbsDownIcon.JPG"
 												style="width:50px; height: 50px;" alt="Submit">
+											<p th:text="${subpost.getNumberOfDislikes()}"></p>
 										</form>
 									</div>
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postShare}" method="Post">
+											<input type="hidden" name="postId" th:value="${subpost.getId()}">
 											<input type="image" src="/Icons/shareIcon.JPG"
 												style="width:50px; height: 50px;" alt="Submit">
 										</form>
@@ -200,8 +218,9 @@
 								</div>
 
 								<div>
-									<form action="#" th:action="@{postMeme}" enctype="multipart/form-data"
+									<form action="#" th:action="@{postResponse}" enctype="multipart/form-data"
 										method="POST">
+										<input type="hidden" name="id" th:value="${subpost.getId()}">
 										<input type="file" name="meme" style="display: inline-block;">
 										<button type="submit" style="display: inline-block;">Upload Meme</button>
 									</form>

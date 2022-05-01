@@ -155,5 +155,5 @@ public class PostModel {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+
 }
