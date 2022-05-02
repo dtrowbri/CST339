@@ -49,15 +49,24 @@
 			margin-left: -38px;
 		}
 
-		#meme .item {
+		#response {
+			color: white;
+		}
+		#response img {
+			color: white;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			border: solid 0px;
+			border-radius: 24px;
+			width: 80%;
+		}
 
-			padding-top: 10px;
-			padding-bottom: 10px;
-			padding-right: 20px;
-			padding-left: 20px;
-			border-bottom: #0b142d 5px solid;
-			margin: 10px;
+		.memeLike {
+			width: 50px;
+			height: 50px;
 			cursor: pointer;
+			color: white;
 		}
 
 		.item {
@@ -93,7 +102,20 @@
 			align-self: auto;
 			order: 0;
 			background-color: yellow;
-
+		}
+		#uploader{
+			padding: 10px;
+			background-color: rgba(3, 194, 198, 0.58);
+		}
+		p{
+			color:white;
+			font-size: large;
+		}
+		#response{
+			background-color: rgba(198, 67, 245, 0.38);
+			border: solid 1px;
+			border-radius: 20px;
+		}
 			/* }
         .item:nth-child(4){
             display: block;
@@ -109,7 +131,6 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: aquamarine;
             font-size: 40px;*/
-		}
 	</style>
 </head>
 
@@ -145,7 +166,7 @@
 
 							<form action="#" th:action="@{postLike}" method="Post">
 								<input type="hidden" name="postId" th:value="${meme.getId()}">
-								<input type="image" src="/Icons/ThumbsUpIcon.JPG" style="width:50px; height: 50px;"
+								<input type="image" src="/Icons/ThumbsUpIcon.JPG" class="memeLike"
 									alt="Submit">
 								<p th:text="${meme.getNumberOfLikes()}"></p>
 							</form>
@@ -154,7 +175,7 @@
 
 							<form action="#" th:action="@{postDislike}" method="Post">
 								<input type="hidden" name="postId" th:value="${meme.getId()}">
-								<input type="image" src="/Icons/ThumbsDownIcon.JPG" style="width:50px; height: 50px;"
+								<input type="image" src="/Icons/ThumbsDownIcon.JPG" class="memeLike"
 									alt="Submit">
 								<p th:text="${meme.getNumberOfDislikes()}"></p>
 							</form>
@@ -163,17 +184,13 @@
 
 							<form action="#" th:action="@{postShare}" method="Post">
 								<input type="hidden" name="postId" th:value="${meme.getId()}">
-								<input type="image" src="/Icons/shareIcon.JPG" style="width:50px; height: 50px;"
+								<input type="image" src="/Icons/shareIcon.JPG" class="memeLike"
 									alt="Submit">
 							</form>
 						</div>
-						<!--							<ol>
-				                	<li id="dank" class="item"><span>Dank 👌</span> </li>
-				                	<li id="sucks" class="item"><span>Sucks 💩</span> </li>
-				                	<li id="spread" class="item"><span>Spread 🦞</span> </li>
-				          		</ol>-->
+<!--                   Uploader                   -->
 		        		<div>
-							<form action="#" th:action="@{postResponse}" enctype="multipart/form-data"
+							<form  id="uploader" action="#" th:action="@{postResponse}" enctype="multipart/form-data"
 								method="POST">
 								<input type="file" name="meme" style="display: inline-block;">
 								<input type="hidden" name="id" th:value="${meme.getId()}">
@@ -181,22 +198,22 @@
 							</form>
 						</div>
 					</div>
-					<div th:each="subpost : ${meme.getResponses()}">
-						<div style="border: 1px solid black">
+					<!-- response -->
+					<div id="response" th:each="subpost : ${meme.getResponses()}">
+						<div class="reply">
 							<div style="margin-left:30px">
 								<div>
 									<p th:text="${subpost.getUsername()}"></p>
 									<p th:text="${subpost.getFormattedDate()}"></p>
 								</div>
 								<div>
-									<img th:src=${subpost.getImageLocation()} style="width:250px; height: 250px;" />
+									<img th:src=${subpost.getImageLocation()} />
 								</div>
 								<div style="display: inline-block;">
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postLike}" method="Post">
 											<input type="hidden" name="postId" th:value="${subpost.getId()}">
-											<input id="dank" class="item" type="image" src="/Icons/ThumbsUpIcon.JPG"
-												style="width:50px; height: 50px;" alt="Submit">
+											<input id="like" class="memeLike" type="image" src="/Icons/ThumbsUpIcon.JPG" alt="Submit">
 											<p th:text="${subpost.getNumberOfLikes()}"></p>
 										</form>
 									</div>
@@ -211,20 +228,21 @@
 									<div style="display: inline-block;">
 										<form action="#" th:action="@{postShare}" method="Post">
 											<input type="hidden" name="postId" th:value="${subpost.getId()}">
-											<input type="image" src="/Icons/shareIcon.JPG"
-												style="width:50px; height: 50px;" alt="Submit">
+											<input type="image" src="/Icons/shareIcon.JPG" class="memeLike" alt="Submit">
 										</form>
 									</div>
 								</div>
 
-								<div>
+								<!--<div>
 									<form action="#" th:action="@{postResponse}" enctype="multipart/form-data"
 										method="POST">
 										<input type="hidden" name="id" th:value="${subpost.getId()}">
 										<input type="file" name="meme" style="display: inline-block;">
 										<button type="submit" style="display: inline-block;">Upload Meme</button>
 									</form>
-								</div>
+									<h3>Replies</h3>
+									Sub sub posts
+								</div> -->
 							</div>
 						</div>
 					</div>

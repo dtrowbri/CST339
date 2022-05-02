@@ -44,3 +44,4 @@ CREATE TABLE `users` (
   UNIQUE KEY `UserId_UNIQUE` (`UserId`),
   UNIQUE KEY `Username_UNIQUE` (`UserName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin7;
+≠≠––≠≠
